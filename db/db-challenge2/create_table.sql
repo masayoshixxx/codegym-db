@@ -11,21 +11,12 @@ CREATE TABLE users (
   updated_at datetime not null default current_timestamp
 );
 
-CREATE TABLE chat_room_users (
-  id int(11) primary key auto_increment,
-  user_id int(11) not null,
-  chat_room_id int(11) not null,
-  created_at datetime not null default current_timestamp,
-  foreign key (user_id) references users(id),
-  foreign key (chat_room_id) references chat_rooms(id)
-);
-
 CREATE TABLE chat_rooms (
   id int(11) primary key auto_increment,
   name varchar(100) not null,
   description varchar(1000),
-  is_send_file tinyint(1) not null default 0,
-  s_direct_chat tinyint(1) not null default 0,
+  is_send_file tinyint(1) not null default 1,
+  is_direct_chat tinyint(1) not null default 0,
   is_deleted tinyint(1) not null default 0,
   created_at datetime not null default current_timestamp,
   created_user_id int(11) not null,
@@ -33,6 +24,15 @@ CREATE TABLE chat_rooms (
   updated_user_id int(11) not null,
   foreign key (created_user_id) references users(id),
   foreign key (updated_user_id) references users(id)
+);
+
+CREATE TABLE chat_room_users (
+  id int(11) primary key auto_increment,
+  user_id int(11) not null,
+  chat_room_id int(11) not null,
+  created_at datetime not null default current_timestamp,
+  foreign key (user_id) references users(id),
+  foreign key (chat_room_id) references chat_rooms(id)
 );
 
 CREATE TABLE posts (
