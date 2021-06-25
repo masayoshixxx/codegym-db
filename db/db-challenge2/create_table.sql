@@ -30,7 +30,7 @@ CREATE TABLE chat_room_users (
   id int(11) primary key auto_increment,
   user_id int(11) not null,
   chat_room_id int(11) not null,
-  created_at datetime not null default current_timestamp,
+  user_joined_at datetime not null default current_timestamp,
   foreign key (user_id) references users(id),
   foreign key (chat_room_id) references chat_rooms(id)
 );
